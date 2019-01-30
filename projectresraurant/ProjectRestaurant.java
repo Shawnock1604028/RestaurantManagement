@@ -1,4 +1,4 @@
-package projectresraurant;
+package RestaurantManagement.projectresraurant;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -16,7 +16,7 @@ import javax.swing.JLabel;
  * @author Shawnock Guha Paul.
  * ID: 1604028.
  */
-public class ProjectResraurant extends JFrame{
+public class ProjectRestaurant extends JFrame{
     
     private final Container c;
             JButton order;
@@ -24,7 +24,7 @@ public class ProjectResraurant extends JFrame{
             JLabel  backgroundimage, header;
             ImageIcon img;
                        
-    ProjectResraurant(){
+    public ProjectRestaurant(){
         
         c = this.getContentPane();
         c.setLayout(null);
@@ -67,8 +67,8 @@ public class ProjectResraurant extends JFrame{
               
     public static void main(String[] args){
      
-            ProjectResraurant frame = new ProjectResraurant();
-            frame.setTitle("restaurant Management System");
+            ProjectRestaurant frame = new ProjectRestaurant();
+            frame.setTitle("Restaurant Management System");
             frame.setVisible(true);
         
     }

@@ -1,4 +1,4 @@
-package projectresraurant;
+package RestaurantManagement.projectresraurant;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -17,19 +17,22 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
  *
- * @author shawnoc Guha Paul.
+ * @author Shawnock Guha Paul.
  * ID: 1604028.
+ * @author  Sheikh Sowmen Rahman
+ * ID: 1604005
  */
 public class OrderMenu extends JFrame{
     private Container c;
             int X = 0;
             int  i1, i2, i3, i4, i5, i6, i7, i8, i9, i10;
-            JLabel header, footer, text,text2,text3,text4,text5,text6,text7,text8,text9,text10, textTotal;
+            JLabel header, footer, text,text1, text2,text3,text4,text5,text6,text7,text8,text9,text10, textTotal;
             JCheckBox item1,item2,item3,item4,item5, itemD1, itemD2, itemD3, itemD4, itemD5;
             JTextField quantity1, quantity2, quantity3, quantity4, quantity5, quantity6, quantity7, quantity8,
                     quantity9, quantity10 ;
@@ -42,8 +45,9 @@ public class OrderMenu extends JFrame{
             "Strawberry      ---- 149 Taka.", "Lacchi            ----   89 Taka.", "Soft Drinks     "
             +"----   20 Taka."};
             int itemsdPrice[] = {25, 70, 149, 89, 20};
-            JTextArea text1,textarea; 
-            JButton submit, clear, print1;
+            JTextArea textarea; 
+            JButton submit, print1, clear, print2;
+            String s1 = "", s2 = "", s3 = "", s4 = "", s5 = "", s6 = "", s7 = "", s8 = "", s9 = "", s10 = "";
             
     OrderMenu(){
         
@@ -64,8 +68,7 @@ public class OrderMenu extends JFrame{
         header.setBounds(30, 10, 500, 50 );
         c.add(header);
         
-        font = new Font("Tempus Sans ITC", Font.BOLD, 20);
-        
+        font = new Font("Tempus Sans ITC", Font.BOLD, 18);
         item1 = new JCheckBox(items[0]);
         item1.setBounds(30, 70 + (0 * 40), 300, 35);
         item1.setFont(font);
@@ -145,7 +148,7 @@ public class OrderMenu extends JFrame{
         header.setBounds(30, 280, 500, 50 );
         c.add(header);
         
-        font = new Font("Tempus Sans ITC", Font.BOLD, 20);
+        font = new Font("Tempus Sans ITC", Font.BOLD, 18);
         
         itemD1 = new JCheckBox(itemsd[0]);
         itemD1.setBounds(30, 340 + (0 * 40), 300, 35);
@@ -237,11 +240,11 @@ public class OrderMenu extends JFrame{
         
         font = new Font("Tempus Sans ITC", Font.BOLD, 20);
 
-        text1 = new JTextArea();
+        text1 = new JLabel();
         text1.setText(items[0] + "               "+ itemsPrice[0] + " X ");
         text1.setBounds(0, 100 + (0 * 35), 500, 30);
-        //text1.setBackground(Color.BLUE);
-        //text1.setForeground(Color.blue);
+        text1.setBackground(Color.BLUE);
+        text1.setForeground(Color.blue);
         text1.setFont(font);
         textarea.add(text1);
 
@@ -352,10 +355,99 @@ public class OrderMenu extends JFrame{
         
         submit.addActionListener(new ActionListener(){ 
             public void actionPerformed(ActionEvent e){
-               String s = Integer.toString(X);
-               textTotal.setText(s + ".00");
+              String s = Integer.toString(X);
+//               textTotal.setText(s + ".00");
+                
+            dispose();
+            
+            JFrame jf = new JFrame("Print Option");
+            jf.setVisible(true);
+            jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            jf.setBounds(10, 10, 600, 700);
+            c = jf.getContentPane();
+            c.setLayout(null);
+            c.setBackground(Color.BLUE);
+            
+            textarea = new JTextArea("----------------------------Receipt-------------------------\n\n");
+            font = new Font("Arial", Font.BOLD, 36);
+            textarea.setFont(font);
+            c.add(textarea);
+            textarea.setBounds(50, 50, 500, 500);
+            textarea.setBackground(Color.GREEN);
+            
+            print1 = new JButton("Bill");
+            print1.setBounds(50, 570, 200, 50);
+            c.add(print1);
+            print1.setFont(font);
+            
+            print2 = new JButton("Print");
+            print2.setBounds(300, 570, 200, 50);
+            print2.setFont(font);
+            c.add(print2);
+            
+                print1.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        font = new Font("Arial", Font.BOLD, 16);
+                        textarea.setFont(font);
+                        
+                        if(s1 != ""){
+                        textarea.append("\n " + s1);
+                        }
+                        if(s2 != ""){
+                        textarea.append("\n " + s2);
+                        }
+                        if(s3 != ""){
+                        textarea.append("\n " + s3);
+                        }
+                        if(s4 != ""){
+                        textarea.append("\n " + s4);
+                        }
+                        if(s5 != ""){
+                        textarea.append("\n " + s5);
+                        }
+                        if(s6 != ""){
+                        textarea.append("\n " + s6);
+                        }
+                        if(s7 != ""){
+                        textarea.append("\n " + s7);
+                        }
+                        if(s8 != ""){
+                        textarea.append("\n " + s8);
+                        }
+                        if(s9 != ""){
+                        textarea.append("\n " + s9);
+                        }
+                        if(s10 != ""){
+                        textarea.append("\n " + s10);
+                        }
+                        textarea.append("\n------------------------------------------------------------\n"
+                                + "-------------------------------------------------------------"
+                                + "\n                                -------------------- Total Bill = " + s);
+                        
+                    }
+                });
+                
+            print2.addActionListener(new ActionListener(){ 
+            public void actionPerformed(ActionEvent e){
+                        try{
+                            boolean sh = textarea.print();
+                            if(sh){
+                                JOptionPane.showMessageDialog(null, "Done printing", "Information", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Printing!", "Error", JOptionPane.ERROR_MESSAGE); 
+                            }
+                        }
+                        catch(PrinterException q){
+                            JOptionPane.showMessageDialog(null, q);
+                        }
+            }
+            });
             }
         });
+        
+        
+
         
         clear.addActionListener(new ActionListener(){ 
             public void actionPerformed(ActionEvent e){
@@ -373,58 +465,19 @@ public class OrderMenu extends JFrame{
                 text9.setText(itemsd[3] + "                "+ itemsdPrice[3] + " X ");
                 text10.setText(itemsd[4] + "                "+ itemsdPrice[4] + " X ");
                 
-                item1.setSelected(false);
-                item2.setSelected(false);
-                item3.setSelected(false);
-                item4.setSelected(false);
-                item5.setSelected(false);
-                itemD1.setSelected(false);
-                itemD2.setSelected(false);
-                itemD3.setSelected(false);
-                itemD4.setSelected(false);
-                itemD5.setSelected(false);
-                i1 = 0; i2 = 0; i3 = 0; i4 = 0; i5 = 0; i6 = 0; i7 = 0; i7 = 0; i8 = 0; i9 = 0; i10 = 0;
+//                item1.setSelected(false);
+//                item2.setSelected(false);
+//                item3.setSelected(false);
+//                item4.setSelected(false);
+//                item5.setSelected(false);
+//                itemD1.setSelected(false);
+//                itemD2.setSelected(false);
+//                itemD3.setSelected(false);
+//                itemD4.setSelected(false);
+//                itemD5.setSelected(false);
+//                i1 = 0; i2 = 0; i3 = 0; i4 = 0; i5 = 0; i6 = 0; i7 = 0; i7 = 0; i8 = 0; i9 = 0; i10 = 0;
             }
         });
-        print1 = new JButton("Print");
-        print1.setBounds(1100, 600, 150, 50);
-        c.add(print1);
-        
-        print1.addActionListener(new ActionListener(){ 
-            public void actionPerformed(ActionEvent e){
-            
-
-            /*
-            try {
-                textarea.print();
-            } catch (PrinterException ex) {
-                Logger.getLogger(OrderMenu.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            */
-            PrinterJob job =  PrinterJob.getPrinterJob();
-            job.setJobName("SSS");
-            job.setPrintable(new Printable(){
-                @Override
-                public int print(Graphics grphcs, PageFormat pf, int i){ //throws PrinterException {
-                    
-                    if(i > 0){
-                        return Printable.NO_SUCH_PAGE;
-                    }
-                    Graphics2D g2 = (Graphics2D)grphcs;
-                    g2.translate(pf.getImageableX(), pf.getImageableY());
-                    g2.scale(0.5, 0.5);
-                    text2.paint(g2);
-                    return Printable.PAGE_EXISTS;
-                    
-                }
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-                
-                
-            });
-        }}
-        );
-        
     }
     
      class Handler implements ActionListener{
@@ -433,11 +486,14 @@ public class OrderMenu extends JFrame{
             
             if(e.getActionCommand() == items[0]){
                 int x = Integer.parseInt(quantity1.getText());
+                s1 = "";
                 if(i1%2 == 0){
+                    s1 = items[0] + "       "+ itemsPrice[0] + " X " + x + " = " + itemsPrice[0] * x;
                     X = X + itemsPrice[0] * x;
                     text1.setText(items[0] + "       "+ itemsPrice[0] + " X " + x + " = " + itemsPrice[0] * x);
                 }
                 else if(i1%2 == 1){
+                    s1 = "";
                     X = X - itemsPrice[0] * x;
                    // x = 0;
                     text1.setText(items[0] + "       "+ itemsPrice[0] + " X 0 = " + itemsPrice[0] * 0);
@@ -447,11 +503,14 @@ public class OrderMenu extends JFrame{
             
             else if(e.getActionCommand() == items[1]){
                 int x = Integer.parseInt(quantity2.getText());
+                s2 = "";
                 if(i2%2 == 0){
+                    s2 = items[1] + "       "+ itemsPrice[1] + " X " + x + " = " + itemsPrice[1] * x;
                     X = X + itemsPrice[1] * x;
                     text2.setText(items[1] + "       "+ itemsPrice[1] + " X " + x + " = " + itemsPrice[1] * x);
                 }
                 else if(i2%2 == 1){
+                    s2 = "";
                     X = X - itemsPrice[1] * x;
                     x = 0;
                     text2.setText(items[1] + "       "+ itemsPrice[1] + " X 0 = " + itemsPrice[1] * 0);
@@ -462,11 +521,14 @@ public class OrderMenu extends JFrame{
             
             else if(e.getActionCommand() == items[2]){
                 int x = Integer.parseInt(quantity3.getText());
+                s3 = "";
                 if(i3%2 == 0){
+                    s3 = items[2] + "       "+ itemsPrice[2] + " X " + x + " = " + itemsPrice[2] * x;
                     X = X + itemsPrice[2] * x;
                     text3.setText(items[2] + "       "+ itemsPrice[2] + " X " + x + " = " + itemsPrice[2] * x);
                 }
                 else if(i3%2 == 1){
+                    s3 = "";
                     X = X - itemsPrice[2] * x;
                    // x = 0;
                     text3.setText(items[2] + "       "+ itemsPrice[2] + " X 0 = " + itemsPrice[2] * 0);
@@ -477,11 +539,14 @@ public class OrderMenu extends JFrame{
             
             else if(e.getActionCommand() == items[3]){
                 int x = Integer.parseInt(quantity4.getText());
+                s4 = "";
                if(i4%2 == 0){
+                   s4 = items[3] + "       "+ itemsPrice[3] + " X " + x + " = " + itemsPrice[3] * x;
                     X = X + itemsPrice[3] * x;
                     text4.setText(items[3] + "       "+ itemsPrice[3] + " X " + x + " = " + itemsPrice[3] * x);
                 }
                 else if(i4%2 == 1){
+                    s4 = "";
                     X = X - itemsPrice[3] * x;
                    // x = 0;
                     text4.setText(items[3] + "       "+ itemsPrice[3] + " X 0 = " + itemsPrice[3] * 0);
@@ -492,11 +557,14 @@ public class OrderMenu extends JFrame{
             
             else if(e.getActionCommand() == items[4]){
                 int x = Integer.parseInt(quantity5.getText());
+                s5 = "";
                 if(i5%2 == 0){
+                    s5 = items[4] + "       "+ itemsPrice[4] + " X " + x + " = " + itemsPrice[4] * x;
                     X = X + itemsPrice[4] * x;
                     text5.setText(items[4] + "       "+ itemsPrice[4] + " X " + x + " = " + itemsPrice[4] * x);
                 }
                 else if(i5%2 == 1){
+                    s5 = "";
                     X = X - itemsPrice[4] * x;
                    // x = 0;
                     text5.setText(items[4] + "       "+ itemsPrice[4] + " X 0 = " + itemsPrice[4] * 0);
@@ -507,11 +575,14 @@ public class OrderMenu extends JFrame{
             
             else if(e.getActionCommand() == itemsd[0]){
                 int x = Integer.parseInt(quantity6.getText());
+                s6 = "";
                 if(i6%2 == 0){
+                    s6 = itemsd[0] + "       "+ itemsdPrice[0] + " X " + x + " = " + itemsdPrice[0] * x;
                     X = X + itemsdPrice[0] * x;
                     text6.setText(itemsd[0] + "       "+ itemsdPrice[0] + " X " + x + " = " + itemsdPrice[0] * x);
                 }
                 else if(i1%2 == 1){
+                    s6 = "";
                     X = X - itemsdPrice[0] * x;
                    // x = 0;
                     text6.setText(itemsd[0] + "       "+ itemsdPrice[0] + " X 0 = " + itemsdPrice[0] * 0);
@@ -522,11 +593,14 @@ public class OrderMenu extends JFrame{
             
             else if(e.getActionCommand() == itemsd[1]){
                 int x = Integer.parseInt(quantity7.getText());
+                s7 = "";
                 if(i7%2 == 0){
+                    s7 = itemsd[1] + "       "+ itemsdPrice[1] + " X " + x + " = " + itemsdPrice[1] * x;
                     X = X + itemsdPrice[1] * x;
                     text7.setText(itemsd[1] + "       "+ itemsdPrice[1] + " X " + x + " = " + itemsdPrice[1] * x);
                 }
                 else if(i7%2 == 1){
+                    s7 = "";
                     X = X - itemsdPrice[1] * x;
                    // x = 0;
                     text7.setText(itemsd[1] + "       "+ itemsdPrice[1] + " X 0 = " + itemsdPrice[1] * 0);
@@ -537,11 +611,14 @@ public class OrderMenu extends JFrame{
             
             else if(e.getActionCommand() == itemsd[2]){
                 int x = Integer.parseInt(quantity8.getText());
+                s8 = "";
                 if(i8%2 == 0){
+                                        s8 = itemsd[2] + "       "+ itemsdPrice[2] + " X " + x + " = " + itemsdPrice[2] * x;
                     X = X + itemsdPrice[2] * x;
                     text8.setText(itemsd[2] + "       "+ itemsdPrice[2] + " X " + x + " = " + itemsdPrice[2] * x);
                 }
                 else if(i8%2 == 1){
+                    s8 = "";
                     X = X - itemsdPrice[2] * x;
                    // x = 0;
                     text8.setText(itemsd[2] + "       "+ itemsdPrice[2] + " X 0 = " + itemsdPrice[2] * 0);
@@ -552,11 +629,14 @@ public class OrderMenu extends JFrame{
             
             else if(e.getActionCommand() == itemsd[3]){
                 int x = Integer.parseInt(quantity9.getText());
+                s9 = "";
                 if(i9%2 == 0){
+                    s9 = itemsd[3] + "       "+ itemsdPrice[3] + " X " + x + " = " + itemsdPrice[3] * x;
                     X = X + itemsdPrice[3] * x;
                     text9.setText(itemsd[3] + "       "+ itemsdPrice[3] + " X " + x + " = " + itemsdPrice[3] * x);
                 }
                 else if(i1%2 == 1){
+                    s9 = "";
                     X = X - itemsdPrice[0] * x;
                    // x = 0;
                     text9.setText(itemsd[3] + "       "+ itemsdPrice[3] + " X 0 = " + itemsdPrice[3] * 0);
@@ -567,11 +647,14 @@ public class OrderMenu extends JFrame{
             
             else if(e.getActionCommand() == itemsd[4]){
                 int x = Integer.parseInt(quantity10.getText());
+                s10 = "";
                 if(i10%2 == 0){
+                    s10 = itemsd[4] + "       "+ itemsdPrice[4] + " X " + x + " = " + itemsdPrice[4] * x;
                     X = X + itemsdPrice[4] * x;
                     text10.setText(itemsd[4] + "       "+ itemsdPrice[4] + " X " + x + " = " + itemsdPrice[4] * x);
                 }
                 else if(i1%2 == 1){
+                    s10 = "";
                     X = X - itemsdPrice[0] * x;
                    // x = 0;
                     text10.setText(itemsd[4] + "       "+ itemsdPrice[4] + " X 0 = " + itemsdPrice[4] * 0);
@@ -582,6 +665,7 @@ public class OrderMenu extends JFrame{
 } 
     public static void main(String args[]){
         OrderMenu frame = new OrderMenu();
+        frame.setTitle("Order Menu");
         frame.setVisible(true);     
     }
 }
